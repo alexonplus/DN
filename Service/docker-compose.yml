@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: taskhub
       POSTGRES_USER: appuser
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    
+
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
@@ -26,6 +28,9 @@ services:
     image: rabbitmq:3-management
     networks:
       - backend-net
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
   
   api:
     build: ../backend
@@ -35,6 +40,11 @@ services:
       - backend-net
     environment:
       ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=taskhub;Username=appuser;Password=${POSTGRES_PASSWORD}"
+      
+      ConnectionStrings__Redis: "cache:6379"
+      RabbitMQ__Host: "broker"
+      RabbitMQ__User: ${RABBITMQ_USER}
+      RabbitMQ__Password: ${RABBITMQ_PASSWORD}
     depends_on:
       db:
         condition: service_healthy
