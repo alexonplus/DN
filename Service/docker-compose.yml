@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    networks:
+      - backend-net
+    environment:
+      POSTGRES_DB: taskhub
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U appuser -d taskhub"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  
+  cache:
+    image: redis:7
+    networks:
+      - backend-net
+  
+  broker:
+    image: rabbitmq:3-management
+    networks:
+      - backend-net
+  
+  api:
+    build: ../backend
+    image: taskhub-api:1.0.0
+    networks:
+      - frontend-net
+      - backend-net
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=taskhub;Username=appuser;Password=${POSTGRES_PASSWORD}"
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  frontend:
+    build: ../frontend
+    image: taskhub-frontend:1.0.0
+    networks:
+      - frontend-net
+    ports:
+      - "8081:8080"
+
+volumes:
+  db_data:
+
+networks:
+  frontend-net:
+  backend-net:

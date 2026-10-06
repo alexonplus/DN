@@ -1,0 +1,241 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000;
+    color: #e0e0e0;
+    font-family: 'IM Fell English', serif;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center; /* Centers the whole container horizontally */
+}
+
+.wide-container {
+    width: 100%;
+    max-width: 1300px; /* Bounds the width so it stays perfectly centered on large screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all children */
+    gap: 2rem;
+}
+
+/* HEADER */
+.main-header {
+    text-align: center;
+    width: 100%;
+}
+
+.skull {
+    font-size: 3.5rem;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: -5px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+h1 {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 4rem;
+    letter-spacing: 8px;
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.subtitle {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: #888;
+    margin-top: -2px;
+}
+
+/* WIDE RULES BOX */
+.wide-rules-box {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    background: rgba(10, 10, 10, 0.8);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    text-align: center; /* Centers the rules text */
+}
+
+.rules-header {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #ccc;
+    text-align: center;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.rule-item {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #bbb;
+}
+
+/* WIDE FORM */
+.form-section {
+    width: 100%;
+}
+
+.wide-form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center; /* Centers inputs in the form */
+    gap: 15px;
+    align-items: center;
+    background: #080808;
+    border: 1px solid #222;
+    padding: 1.2rem 1.5rem;
+    border-radius: 4px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.wide-form input {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #444;
+    padding: 10px 8px;
+    font-family: 'IM Fell English', serif;
+    font-size: 1.1rem;
+    transition: border-color 0.3s;
+    text-align: center; /* Centers text inside inputs */
+}
+
+.wide-form input#firstName,
+.wide-form input#lastName {
+    flex: 1;
+    min-width: 150px;
+}
+
+.wide-form input#cause {
+    flex: 2;
+    min-width: 200px;
+}
+
+.wide-form input#deathDate {
+    flex: 1;
+    min-width: 180px;
+}
+
+.wide-form input:focus {
+    outline: none;
+    border-bottom-color: #fff;
+}
+
+.wide-form input::placeholder {
+    color: #555;
+    font-style: italic;
+    text-align: center;
+}
+
+.wide-form input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.wide-form button {
+    background-color: transparent;
+    color: #aaa;
+    border: 1px solid #555;
+    padding: 10px 25px;
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+    border-radius: 4px;
+}
+
+.wide-form button:hover {
+    color: #fff;
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* WIDE NOTEBOOK ENTRIES */
+.wide-notebook {
+    width: 100%;
+    min-height: 350px;
+    background-color: #030303;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the entries container */
+}
+
+/* Notebook horizontal line background */
+.wide-notebook::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+        transparent,
+        transparent 39px,
+        rgba(255, 255, 255, 0.04) 40px
+    );
+    pointer-events: none;
+}
+
+#entriesList {
+    position: relative;
+    z-index: 1;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 1000px; /* Keeps entries perfectly readable and centered in the middle of the screen */
+}
+
+.entry-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+    animation: fadeIn 1s forwards;
+    width: 100%;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.entry-name {
+    font-family: 'Caveat', cursive;
+    font-size: 2.5rem;
+    color: #eee;
+    letter-spacing: 1px;
+}
+
+.entry-details {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #777;
+    display: flex;
+    gap: 20px;
+}

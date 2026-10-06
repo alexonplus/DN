@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Death Note</title>
+    <link rel="stylesheet" href="style.css?v=4">
+    <!-- Google Fonts for Anime-accurate style -->
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wide-container">
+        
+        <!-- HEADER -->
+        <header class="main-header">
+            <div class="skull">☠️</div>
+            <h1>DEATH NOTE</h1>
+            <div class="subtitle">How to Use It</div>
+        </header>
+
+        <!-- WIDE RULES BOX -->
+        <section class="wide-rules-box">
+            <div class="rules-header">I</div>
+            <div class="rules-grid">
+                <div class="rule-item">* The human whose name is written in this note shall die.</div>
+                <div class="rule-item">* This note will not take effect unless the writer has the person's face in their mind when writing his/her name. Therefore, people sharing the same name will not be affected.</div>
+                <div class="rule-item">* If the cause of death is written within 40 seconds of writing the person's name, it will happen.</div>
+                <div class="rule-item">* If the cause of death is not specified, the person will simply die of a heart attack.</div>
+            </div>
+        </section>
+
+        <!-- WIDE FORM ROW -->
+        <section class="form-section">
+            <form id="deathForm" class="wide-form">
+                <input type="text" id="firstName" placeholder="First Name" required autocomplete="off">
+                <input type="text" id="lastName" placeholder="Last Name" required autocomplete="off">
+                <input type="text" id="cause" placeholder="Cause of death (default: Heart Attack)" autocomplete="off">
+                <input type="datetime-local" id="deathDate" required>
+                <button type="submit">WRITE IN THE NOTE</button>
+            </form>
+        </section>
+
+        <!-- WIDE NOTEBOOK ENTRIES -->
+        <main class="wide-notebook">
+            <ul id="entriesList"></ul>
+        </main>
+
+    </div>
+    <script src="script.js?v=4"></script>
+</body>
+</html>
