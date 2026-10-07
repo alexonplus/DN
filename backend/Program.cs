@@ -99,8 +99,9 @@ app.MapPost("/api/tasks", async (DeathNoteRequest? request, ApplicationDbContext
         Id = Guid.NewGuid(),
         Name = request.Name.Trim(),
         Cause = request.Cause?.Trim() is { Length: > 0 } c ? c : "Heart Attack",
-        DeathDate = DateTime.SpecifyKind(request.DeathDate, DateTimeKind.Utc)
-
+        DeathDate = request.DeathDate.HasValue 
+            ? DateTime.SpecifyKind(request.DeathDate.Value, DateTimeKind.Utc) 
+            : DateTime.UtcNow.AddSeconds(40)
     };
     db.Entries.Add(entry);
     await db.SaveChangesAsync();
@@ -153,7 +154,7 @@ public class DeathNoteEntry
     public string Cause { get; set; } = "Heart Attack";
     public DateTime DeathDate { get; set; }
 }
-public record DeathNoteRequest(string Name, string? Cause, DateTime DeathDate);
+public record DeathNoteRequest(string Name, string? Cause, DateTime? DeathDate);
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }

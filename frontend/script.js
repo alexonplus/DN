@@ -51,7 +51,7 @@ document.getElementById('deathForm').addEventListener('submit', async function(e
         body: JSON.stringify({
             name: `${firstName} ${lastName}`,
             cause: cause,
-            deathDate: deathDateInput.value
+            deathDate: deathDateInput.value ? deathDateInput.value : null
         })
     });
     const saved = await res.json();
