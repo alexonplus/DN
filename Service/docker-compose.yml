@@ -52,6 +52,8 @@ services:
   frontend:
     build: ../frontend
     image: taskhub-frontend:1.0.0
+    depends_on:
+      - api
     networks:
       - frontend-net
     ports:
